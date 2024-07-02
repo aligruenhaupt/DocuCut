@@ -44,11 +44,12 @@ def add_line(terminal_output, line, text):
 def print_main_menu(terminal):
     add_line(terminal, 1, "DocuCut V0.1")
     add_line(terminal, 2, "made by Ali Yesilbas")
-    add_line(terminal, 3, "h for help, q for quit")
+    add_line(terminal, 3, "")
     add_line(terminal, 4, "")
     add_line(terminal, 5, "")
     add_line(terminal, 6, "1: Merge PDFs")
     add_line(terminal, 7, "2: Cut PDFs")
+    add_line(terminal, 8, "q: quit")
     print_terminal(terminal)
     selected_mode = input("Please select a mode: ")
     return selected_mode
@@ -66,6 +67,18 @@ def print_merge_menu(terminal):
     print_terminal(terminal)
     pdfs = input().split(',')
     merge.merge_pdfs(output_file, pdfs)
+
+def print_cut_menu(terminal):
+    terminal = design_terminal()
+    add_line(terminal, 1, "DocuCut V0.1")
+    add_line(terminal, 2, "Cut PDFs")
+    add_line(terminal, 3, "")
+    add_line(terminal, 4, "Enter output file name:")
+    print_terminal(terminal)
+    output_file = input()
+    add_line(terminal, 5, "Enter paths of the PDF to cut")
+    print_terminal(terminal)
+    pdf = input()
 
 
 def main():
