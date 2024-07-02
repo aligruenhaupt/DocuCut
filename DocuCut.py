@@ -1,6 +1,8 @@
 import os
 import sys
 import PyPDF2
+import merge
+
 
 def get_terminal_size():
     try:
@@ -8,6 +10,7 @@ def get_terminal_size():
         return size
     except OSError:
         return os.terminal_size((80, 24))
+
 
 def design_terminal():
     columns = get_terminal_size().columns - 1
@@ -24,16 +27,19 @@ def design_terminal():
 
     return terminal_output
 
+
 def print_terminal(terminal_output):
     for i in range(get_terminal_size().lines - 1):
         for j in range(get_terminal_size().columns - 1):
             print(terminal_output[i][j], end="")
         print()
 
+
 def add_line(terminal_output, line, text):
     char_text = list(text)
     for i in range(len(char_text)):
         terminal_output[line][2+i] = char_text[i]
+
 
 def print_main_menu(terminal):
     add_line(terminal, 1, "DocuCut V0.1")
@@ -47,6 +53,7 @@ def print_main_menu(terminal):
     selected_mode = input("Please select a mode: ")
     return selected_mode
 
+
 def print_merge_menu(terminal):
     terminal = design_terminal()
     add_line(terminal, 1, "DocuCut V0.1")
@@ -58,25 +65,8 @@ def print_merge_menu(terminal):
     add_line(terminal, 5, "Enter paths of PDFs to merge (comma separated):")
     print_terminal(terminal)
     pdfs = input().split(',')
-    merge_pdfs(output_file, pdfs)
+    merge.merge_pdfs(output_file, pdfs)
 
-def merge_pdfs(output_file, pdfs):
-    pdf_writer = PyPDF2.PdfWriter()
-
-    for pdf_path in pdfs:
-        try:
-            pdf_reader = PyPDF2.PdfReader(pdf_path.strip())
-            for page_num in range(len(pdf_reader.pages)):
-                page = pdf_reader.pages[page_num]
-                pdf_writer.add_page(page)
-        except FileNotFoundError:
-            print(f"File {pdf_path} not found. Skipping.")
-        except PyPDF2.errors.PdfReadError:
-            print(f"Error reading {pdf_path}. Skipping.")
-
-    with open(output_file, 'wb') as out:
-        pdf_writer.write(out)
-    print(f"Merged PDF saved as {output_file}")
 
 def main():
     while True:
@@ -95,6 +85,7 @@ def main():
             break
         else:
             print("Invalid selection. Please try again.")
+
 
 if __name__ == "__main__":
     main()
