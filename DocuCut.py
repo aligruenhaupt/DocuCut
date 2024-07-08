@@ -11,7 +11,7 @@ class GUI:
         entry.insert(tk.END, filename)
 
     def browse_output_path(self, entry_outputfile):
-        directory_path = filedialog.askdirectory(initialdir="/")
+        directory_path = filedialog.askdirectory(initialdir="/home/ysl/")
         if directory_path:
             entry_outputfile.delete(0, tk.END)  # Clear any existing text in the entry
             entry_outputfile.insert(tk.END, directory_path)
@@ -40,26 +40,27 @@ class GUI:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("DocuCut")
-        self.root.geometry("670x320")  # Adjusted window size for better visibility
+        self.root.configure(bg="lavender")
+        self.root.geometry("730x300")  # Adjusted window size for better visibility
 
         # Label and entry for Source File 1
-        label_sourcefile_1 = tk.Label(self.root, text="Source File 1:")
+        label_sourcefile_1 = tk.Label( self.root, bg="lavender", text="Source File 1:", font="Arial")
         label_sourcefile_1.grid(row=0, column=0, padx=10, pady=10, sticky='w')
 
-        entry_sourcefile_1 = tk.Entry(self.root, width=50)
+        entry_sourcefile_1 = tk.Entry(self.root, width=50, font="Arial")
         entry_sourcefile_1.grid(row=0, column=1, padx=10, pady=10, sticky='w')
 
-        button_browse_sf1 = tk.Button(self.root, text="Browse...", command=lambda: self.browsefunc(entry_sourcefile_1))
+        button_browse_sf1 = tk.Button(self.root, text="Browse...", command=lambda: self.browsefunc(entry_sourcefile_1), font="Arial")
         button_browse_sf1.grid(row=0, column=2, padx=5, pady=5, sticky='w')
 
         # Label and entry for Source File 2
-        label_sourcefile_2 = tk.Label(self.root, text="Source File 2:")
+        label_sourcefile_2 = tk.Label(self.root, text="Source File 2:", font="Arial", bg="lavender")
         label_sourcefile_2.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
-        entry_sourcefile_2 = tk.Entry(self.root, width=50)
+        entry_sourcefile_2 = tk.Entry(self.root, width=50, font="Arial")
         entry_sourcefile_2.grid(row=1, column=1, padx=10, pady=10, sticky='w')
 
-        button_browse_sf2 = tk.Button(self.root, text="Browse...", command=lambda: self.browsefunc(entry_sourcefile_2))
+        button_browse_sf2 = tk.Button(self.root, text="Browse...", command=lambda: self.browsefunc(entry_sourcefile_2), font="Arial")
         button_browse_sf2.grid(row=1, column=2, padx=5, pady=5, sticky='w')
 
         # Horizontal separator after Source File 2
@@ -67,28 +68,28 @@ class GUI:
         separator.grid(row=2, column=0, columnspan=3, padx=10, pady=10, sticky='ew')
 
         # Label and entry for Output Directory
-        label_outputfile = tk.Label(self.root, text="Output Directory:")
+        label_outputfile = tk.Label(self.root, text="Output Directory:", font="Arial", bg="lavender")
         label_outputfile.grid(row=3, column=0, padx=10, pady=10, sticky='w')
 
-        entry_outputfile = tk.Entry(self.root, width=50)
+        entry_outputfile = tk.Entry(self.root, width=50, font="Arial")
         entry_outputfile.grid(row=3, column=1, padx=10, pady=10, sticky='w')
 
-        button_browse_output = tk.Button(self.root, text="Browse...", command=lambda: self.browse_output_path(entry_outputfile))
+        button_browse_output = tk.Button(self.root, text="Browse...", command=lambda: self.browse_output_path(entry_outputfile), font="Arial")
         button_browse_output.grid(row=3, column=2, padx=5, pady=5, sticky='w')
 
         # Label and entry for Output File Name
-        label_outputname = tk.Label(self.root, text="Output File Name:")
+        label_outputname = tk.Label(self.root, text="Output File Name:", font="Arial", bg="lavender")
         label_outputname.grid(row=4, column=0, padx=10, pady=10, sticky='w')
 
-        entry_output_name = tk.Entry(self.root, width=50)
+        entry_output_name = tk.Entry(self.root, width=50, font="Arial")
         entry_output_name.grid(row=4, column=1, padx=10, pady=10, sticky='w')
 
         # Merge button
-        button_merge = tk.Button(self.root, text="Merge!", command=lambda: self.merge_files(entry_sourcefile_1, entry_sourcefile_2, entry_outputfile, entry_output_name, status_label))
+        button_merge = tk.Button(self.root, font="Arial", text="Merge!", command=lambda: self.merge_files(entry_sourcefile_1, entry_sourcefile_2, entry_outputfile, entry_output_name, status_label))
         button_merge.grid(row=5, column=1, padx=5, pady=5, sticky='ew')
 
         # Status label for displaying merge status
-        status_label = tk.Label(self.root, text="", fg="black")
+        status_label = tk.Label(self.root, text="", fg="black", font="Arial")
         status_label.grid(row=6, column=0, columnspan=3, padx=10, pady=10)
 
         self.root.mainloop()
