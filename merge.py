@@ -1,12 +1,11 @@
-import os
-import sys
 import PyPDF2
 
-
-def merge_pdfs(output_file, pdfs):
+def merge_pdfs(output_file, source_file_1, source_file_2):
     pdf_writer = PyPDF2.PdfWriter()
 
-    for pdf_path in pdfs:
+    pdf_paths = [source_file_1, source_file_2]
+
+    for pdf_path in pdf_paths:
         try:
             pdf_reader = PyPDF2.PdfReader(pdf_path.strip())
             for page_num in range(len(pdf_reader.pages)):
@@ -19,4 +18,5 @@ def merge_pdfs(output_file, pdfs):
 
     with open(output_file, 'wb') as out:
         pdf_writer.write(out)
-    print(f"Merged PDF saved as {output_file}")
+
+    return f"Merged PDF saved as {output_file}"
