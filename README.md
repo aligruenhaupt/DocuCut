@@ -1,1 +1,1 @@
-A little program to cut and merge PDFs.
+A little program to ~~cut~~ *(still in work)* and merge PDFs.
